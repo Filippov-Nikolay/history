@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test 1</title>
+
+    <!-- STYLE -->
+    <style>
+        *:not(ul, ol, li) {
+            margin: 0;
+            padding: 0;
+        }
+        
+
+        body {
+            padding: 15px;
+            padding-bottom: 50px;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            color: #fff;
+            font-size: 18px;
+            background: #171717;
+        }
+        input {
+            position: relative;
+            z-index: 2;
+
+            display: block;
+            -webkit-user-select: auto !important;
+            -khtml-user-select: auto !important;
+            -moz-user-select: auto !important;
+            -ms-user-select: auto !important;
+            -o-user-select: auto !important;
+            user-select: auto !important;  
+        }
+
+        .option {
+            list-style-type: upper-alpha;
+        }
+        .option__wrapper {
+            display: flex;
+            align-items: center;
+        }
+        .option__text {
+            margin-left: 5px;
+        }
+        .item {
+            margin-bottom: 15px;
+        }
+        .option__item {
+            margin-bottom: 5px;
+        }
+        .option__text::first-letter {
+            text-transform: uppercase;
+        }
+        .btn {
+            display: block;
+
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 55px;
+            padding: 15px;
+
+            border-radius: 15px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+            color: #fff;
+            background-color: #5353ff;
+            outline: none;
+            border: none;
+        }
+        .answer {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+
+    <!-- SCRIPT -->
+    <script>
+        window.addEventListener("load", function () {
+            let deviceAgent = navigator.userAgent.toLowerCase(),
+            agentID = deviceAgent.match(/(iphone|ipod|ipad)/),
+            mobileLink = $('.btn'); // Добавить этот класс всем ссылкам, которые должны нажиматься
+
+            touchMenuEvent = agentID ? "touchstart" : "click";
+            mobileLink.bind(touchMenuEvent, function() {
+                answerBtn();
+            });
+
+            let numberItem = document.querySelectorAll(".item");
+            let checkBox = document.querySelectorAll(".option__wrapper");
+            let btn = document.querySelector("#btn");
+            
+            let count = 0;
+
+            for (let i = 0; i < checkBox.length; i++) {
+                checkBox[i].addEventListener("click", function () {
+                    this.querySelector("input").checked = true
+                    
+                    console.log(this.parentNode.dataset.answer);
+                })
+            }
+
+
+            function answerBtn() {
+                count = 0;
+
+                let checkInput = document.querySelectorAll('input[type="radio"]:checked');
+
+                for (let i = 0; i < checkInput.length; i++) {
+                    if (checkInput[i].closest('[data-answer]'))
+                        count++;
+                }
+
+                document.querySelector(".answer").innerHTML = `Кол-во верных ответов: ${count} из ${numberItem.length - 3}`;
+                // alert(`Кол-во верных ответов: ${count} из ${numberItem.length - 3}`);
+            }
+
+            // btn.addEventListener('click', answerBtn);
+            // btn.addEventListener('touchstart', answerBtn);
+
+        })
+    </script>
+</head>
+<body>
+    <!-- CODE -->
+    <div class="container">
+        <h1 class="title">ТЕСТ #1</h1>
+
+        <form action="#" method="post">
+            <ol class="test">
+                <!-- Вопрос 1 -->
+                <li class="item">
+                    <div class="item__text">
+                        В декабре 1917 года было создано правительство 
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q1">
+                                <label class="option__text">
+                                    КазССР
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q1">
+                                <label class="option__text">
+                                    Туркестанский АССР
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q1">
+                                <label class="option__text">
+                                    Кокандская автономия
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q1">
+                                <label class="option__text">
+                                    Алаш орда
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 2 -->
+                <li class="item">
+                    <div class="item__text">
+                        Кистью первого казахского художника Абылхана Кастеева написаны работы
+                    </div>
+                    <ol class="option">
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q2">
+                                <label for="q2" class="option__text">
+                                    «Сватовство старого бая», «Долина Таласа»
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q2">
+                                <label for="q2" class="option__text">
+                                    «В кочевье», «Утро»
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q2">
+                                <label for="q2" class="option__text">
+                                    «Жолдастар», «Көк»
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q2">
+                                <label for="q2" class="option__text">
+                                    «Вродном ауле» «Утро»
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 3 -->
+                <li class="item">
+                    <div class="item__text">
+                        Важнейшей причиной образования Казахского ханства была потребность кочевых племен
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q3">
+                                <label class="option__text">
+                                    в контроле над торговыми путями
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q3">
+                                <label class="option__text">
+                                    перехода к оседлому образу жизни
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q3">
+                                <label class="option__text">
+                                    создать ирригационную систему
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q3">
+                                <label class="option__text">
+                                    в единой пастбищной территории
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 4 -->
+                <li class="item">
+                    <div class="item__text">
+                        При каком хане был “Золотой век”
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q4">
+                                <label class="option__text">
+                                    Абылай хан
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q4">
+                                <label class="option__text">
+                                    Касым хан
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q4">
+                                <label class="option__text">
+                                    Жангир хан
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q4">
+                                <label class="option__text">
+                                    Тауке хан
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 5 -->
+                <li class="item">
+                    <div class="item__text">
+                        Год Орбулакской битвы
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q5">
+                                <label class="option__text">
+                                    1635 г.
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q5">
+                                <label class="option__text">
+                                    1680 г.
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q5">
+                                <label class="option__text">
+                                    1643 г.
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q5">
+                                <label class="option__text">
+                                    1627 г.
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 6 -->
+                <li class="item">
+                    <div class="item__text">
+                        Основной идея произведений поэтов эпоха “Зар заман” является
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q6">
+                                <label class="option__text">
+                                    целостность народа в государтве
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q6">
+                                <label class="option__text">
+                                    эпоха беззаконии
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q6">
+                                <label class="option__text">
+                                    разоблачение колониальной политики России
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q6">
+                                <label class="option__text">
+                                    эпоха насилия и гонения
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 7 -->
+                <li class="item">
+                    <div class="item__text">
+                        В 70-е ХХ века в Казахстане было реформировано
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q7">
+                                <label class="option__text">
+                                    
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q7">
+                                <label class="option__text">
+                                    
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q7">
+                                <label class="option__text">
+                                    
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q7">
+                                <label class="option__text">
+                                    
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 8 -->
+                <li class="item">
+                    <div class="item__text">
+                        Султан Саржан Касымов возглавил против политики
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q8">
+                                <label class="option__text">
+                                    
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q8">
+                                <label class="option__text">
+                                    «Устав о сибирских киргизах»
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q8">
+                                <label class="option__text">
+                                    «Устав об оренбургских киргизах»
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q8">
+                                <label class="option__text">
+                                    
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 9 -->
+                <li class="item">
+                    <div class="item__text">
+                        Столица найманов
+                    </div>
+                    <ol class="option">
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q9">
+                                <label class="option__text">
+                                    Балыкты
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q9">
+                                <label class="option__text">
+                                    Битобе
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q9">
+                                <label class="option__text">
+                                    Баласагун
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q9">
+                                <label class="option__text">
+                                    Сыгнак
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 10 -->
+                <li class="item">
+                    <div class="item__text">
+                        Описание походов Дария І против саков сообщается в надписи 
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q10">
+                                <label class="option__text">
+                                    Авеста
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q10">
+                                <label class="option__text">
+                                    Бехистунская
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q10">
+                                <label class="option__text">
+                                    Культегина
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q10">
+                                <label class="option__text">
+                                    Русская
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 11 -->
+                <li class="item">
+                    <div class="item__text">
+                        Используя исторические знания и карту определите область  входившую в состав Западно-Сибирского генерал-губернаторства
+                    </div>
+                    <ol class="option">
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q11">
+                                <label class="option__text">
+                                    Акмолинск
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q11">
+                                <label class="option__text">
+                                    Тургайская
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q11">
+                                <label class="option__text">
+                                    Фергана
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q11">
+                                <label class="option__text">
+                                    Сырдарьинская
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 12 -->
+                <li class="item">
+                    <div class="item__text">
+                        Используя исторические знания и карту определите область  входившую в состав Туркестанского генерал-губернаторства
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q12">
+                                <label class="option__text">
+                                    Ферганская
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q12">
+                                <label class="option__text">
+                                    Уральская
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q12">
+                                <label class="option__text">
+                                    Акмолинская
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q12">
+                                <label class="option__text">
+                                    Сырдарьинская
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 13 -->
+                <li class="item">
+                    <div class="item__text">
+                        Используя исторические знания определите по карте генерал-губернаторство в которую вошли Уральская и Тургайская области
+                    </div>
+                    <ol class="option">
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q13">
+                                <label class="option__text">
+                                    Оренбургская
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q13">
+                                <label class="option__text">
+                                    Букеевская
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q13">
+                                <label class="option__text">
+                                    Астраханская
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q13">
+                                <label class="option__text">
+                                    Туркестанская
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 14 -->
+                <li class="item">
+                    <div class="item__text">
+                        Используя исторические знания и карту определите генерал-губернаторство в которого вошла Внутренняя Орда
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q14">
+                                <label class="option__text">
+                                    Закаспийская
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q14">
+                                <label class="option__text">
+                                    Степная
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q14">
+                                <label class="option__text">
+                                    Астраханская
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q14">
+                                <label class="option__text">
+                                    Туркестанская
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 15 -->
+                <li class="item">
+                    <div class="item__text">
+                        Используя исторические знания определите генерал-губернаторство, в которую вошла часть территорий кыргызов и узбеков
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q15">
+                                <label class="option__text">
+                                    Западно-Сибирское
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q15">
+                                <label class="option__text">
+                                    Туркестанское 
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q15">
+                                <label class="option__text">
+                                    Астраханьское
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q15">
+                                <label class="option__text">
+                                    Оренбургское
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 16 -->
+                <li class="item">
+                    <div class="item__text">
+                        Определите название правительства, лидеры которого представлены на фото
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q16">
+                                <label class="option__text">
+                                    «Үш жүз»
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q16">
+                                <label class="option__text">
+                                    «Мәңгілік ел»
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q16">
+                                <label class="option__text">
+                                    «Алаш Орда» 
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q16">
+                                <label class="option__text">
+                                    «Қазақ»
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 17 -->
+                <li class="item">
+                    <div class="item__text">
+                        Укажите автора сборника «Оян қазақ!» представленного на фото
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q17">
+                                <label class="option__text">
+                                    А.Бокейханов
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q17">
+                                <label class="option__text">
+                                    М.Тынышпаев
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q17">
+                                <label class="option__text">
+                                    А.Байтурсынов
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q17">
+                                <label class="option__text">
+                                    М.Дулатов
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 18 -->
+                <li class="item">
+                    <div class="item__text">
+                        Укажите автора сборника «Оян қазақ!» представленного на фото
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q18">
+                                <label class="option__text">
+                                    А.Бокейханов
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q18">
+                                <label class="option__text">
+                                    М.Тынышпаев
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q18">
+                                <label class="option__text">
+                                    А.Байтурсынов
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q18">
+                                <label class="option__text">
+                                    М.Дулатов
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 19 -->
+                <li class="item">
+                    <div class="item__text">
+                        Определите верные аргументы
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q19">
+                                <label class="option__text">
+                                    
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q19">
+                                <label class="option__text">
+                                    
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q19">
+                                <label class="option__text">
+                                    
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q19">
+                                <label class="option__text">
+                                    
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+
+                <!-- Вопрос 20 -->
+                <li class="item">
+                    <div class="item__text">
+                        <p>Соотнесите личности, представленные на фото, и их деятельность</p>
+                        <p>1.А.Бокейханов</p>
+                        <p>2.М.Дулатов</p>
+                        <p>3.А.Байтурсынов</p>
+                        <p>А.Реформировал казахскую письменность на основе арабской графики</p>
+                        <p>Б.Автор собрание «Оян қазақ», где в политической форме передает тяжелое положение народа</p>
+                        <p>В.В связи с преследованием властей вынужден под псевдонимом «Қыр баласы»</p>
+                    </div>
+                    <ol class="option">
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q20">
+                                <label class="option__text">
+                                    1-Б; 2-А; 3-В
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q20">
+                                <label class="option__text">
+                                    1-А; 2-Б; 3-В
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item" data-answer="true">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q20">
+                                <label class="option__text">
+                                    1-В; 2-Б; 3-А
+                                </label>
+                            </div>
+                        </li>
+                        <li class="option__item">
+                            <div class="option__wrapper">
+                                <input type="radio" name="q20">
+                                <label class="option__text">
+                                    1-Б; 2-В; 3-А
+                                </label>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+            <div class="submit">
+                <button id="btn" class="btn" type="button" onclick="">Подтвердить ответы</button>
+            </div>
+        </form>
+
+        <div class="answer">Кол-во верных ответов</div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</body>
+</html>
